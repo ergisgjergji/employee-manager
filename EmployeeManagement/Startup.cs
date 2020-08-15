@@ -26,7 +26,7 @@ namespace EmployeeManagement
         {
             // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ SQL Server - Test ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             //services.AddDbContextPool<ApplicationDbContext>(
-            //    options => options.UseInternalServiceProvider(_config.GetConnectionString("sql_test"))
+            //    options => options.UseSqlServer(_config.GetConnectionString("sql_test"))
             //);
 
             // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ MySql - Test ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
