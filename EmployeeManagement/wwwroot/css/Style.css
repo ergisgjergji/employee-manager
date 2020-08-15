@@ -1,0 +1,30 @@
+﻿body {
+    min-height: 100vh;
+}
+
+.input-validation-error {
+    border-color: #dc3545 !important;
+}
+.field-validation-error {
+    color: #dc3545 !important;
+}
+
+.imageThumbnail {
+    max-height: 200px !important;
+    width: auto;
+}
+
+.access-denied {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.image-hover {
+    cursor: pointer;
+    transition: 0.3s all linear;
+}
+.image-hover:hover {
+    transform: scale(1.05);
+}

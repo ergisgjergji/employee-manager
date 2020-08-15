@@ -1,0 +1,70 @@
+﻿@model EditEmployeeVm
+
+@{
+    ViewBag.Title = "Edit Employee";
+    var photoPath = "~/images/employees/" + (String.IsNullOrEmpty(Model.PhotoPath) ? "noimage.png" : Model.PhotoPath);
+}
+
+<div class="col-12 col-md-10 col-lg-8 my-3 mx-auto">
+
+    <h3 class="text-center font-weight-light">Edit Employee</h3>
+    <hr />
+
+    <form enctype="multipart/form-data" asp-controller="Home" asp-action="Edit" method="post">
+
+        <input hidden asp-for="EncryptedId" />
+        <input hidden asp-for="PhotoPath" />
+
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control shadow-sm" placeholder="Name" />
+            <span asp-validation-for="Name"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" class="form-control shadow-sm" placeholder="Email" />
+            <span asp-validation-for="Email"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Department"></label>
+            <select asp-for="Department" asp-items="Html.GetEnumSelectList<Dept>()" class="custom-select shadow-sm">
+                <option value=""> - Select department - </option>
+            </select>
+            <span asp-validation-for="Department"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Photo"></label>
+            <div class="custom-file">
+                <input asp-for="Photo" class="form-control custom-file-input" id="customFile">
+                <label class="custom-file-label" for="customFile">Change photo...</label>
+            </div>
+            <span asp-validation-for="Photo"></span>
+        </div>
+
+        <div class="text-center">
+            <img src="@photoPath" class="imageThumbnail" asp-append-version="true" />
+        </div>
+
+        <div class="text-center mt-4">
+            <a asp-controller="Home" asp-action="Index" class="btn btn-secondary mx-1 shadow"> Back </a>
+            <button type="submit" class="btn btn-primary mx-1 shadow"> Update </button>
+        </div>
+    </form>
+</div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+
+            $('.custom-file-input').on('change', function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).next('.custom-file-label').html(fileName);
+            });
+
+        });
+    </script>
+}

@@ -1,0 +1,70 @@
+﻿@inject SignInManager<ApplicationUser> signInManager
+@inject UserManager<ApplicationUser> userManager
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+
+    <div class="container">
+        <a class="navbar-brand p-0">
+            <img src="~/images/logo.png" width="30" height="30" />
+        </a>
+
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbar-menu">
+            <ul class="navbar-nav mr-auto">
+                @if (signInManager.IsSignedIn(User))
+                {
+                    <li class="nav-item">
+                        <a asp-controller="Home" asp-action="Index" class="nav-link"> Employees </a>
+                    </li>
+                    if (User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenu"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Manage
+                            </a>
+                            <div class="dropdown-menu shadow p-0" aria-labelledby="navbarDropdownMenu">
+                                <a asp-controller="Administration" asp-action="ListUsers" class="dropdown-item border-bottom"> Users </a>
+                                <a asp-controller="Administration" asp-action="ListRoles" class="dropdown-item border-bottom"> Roles </a>
+                            </div>
+                        </li>
+                    }
+                }
+            </ul>
+
+            <ul class="navbar-nav ml-auto">
+                @if (signInManager.IsSignedIn(User))
+                {
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle border-bottom" href="#" id="navbarDropdownMenu"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Welcome, @userManager.GetUserAsync(User).Result.FullName
+                        </a>
+                        <div class="dropdown-menu shadow p-0" aria-labelledby="navbarDropdownMenu">
+                            <a asp-controller="Account" asp-action="EditProfile" class="dropdown-item border-bottom"> Edit profile </a>
+                            <a asp-controller="Account" asp-action="ChangePassword" class="dropdown-item border-bottom"> Change password </a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <form method="post" asp-controller="Account" asp-action="Logout">
+                            <input type="submit" class="nav-link btn btn-link" value="Logout" />
+                        </form>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a asp-controller="Account" asp-action="Register" class="nav-link"> Register </a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-controller="Account" asp-action="Login" class="nav-link"> Login </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+
+</nav>

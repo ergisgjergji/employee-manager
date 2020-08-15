@@ -1,0 +1,17 @@
+﻿@{ 
+    ViewBag.Title = "Not Found";
+}
+
+<div class="text-center py-4 mt-4 rounded border shadow">
+
+    <h3 class="font-weight-light"> 
+        Sorry, 
+        <span class="font-weight-normal text-danger">
+            @ViewBag.Path @ViewBag.QueryString
+        </span> 
+        could not be found
+    </h3>
+    <hr/>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-primary mt-2"> Home Page </a>
+
+</div>

@@ -1,0 +1,59 @@
+﻿@model EditUserVm
+
+@{
+    ViewBag.Title = "Edit User";
+}
+
+<div class="col-12 col-md-10 mx-auto my-3">
+
+    <h3 class="text-center font-weight-light"> Edit User </h3>
+    <hr />
+
+    <form asp-controller="Administration" asp-action="EditUser" method="post">
+        <div class="form-group">
+            <label asp-for="Id"></label>
+            <input asp-for="Id" disabled class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="FullName"></label>
+            <input asp-for="FullName" class="form-control" />
+            <span asp-validation-for="FullName"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="UserName"></label>
+            <input asp-for="UserName" class="form-control" />
+            <span asp-validation-for="UserName"></span>
+        </div>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="text-center mt-4">
+            <a asp-controller="Administration" asp-action="ListUsers" class="btn btn-sm btn-secondary mx-1 shadow"> Cancel </a>
+            <button type="submit" class="btn btn-sm btn-primary mx-1 shadow"> Update </button>
+        </div>
+    </form>
+
+    <div class="card my-4">
+        <div class="card-header">
+            <h5> User roles </h5>
+        </div>
+        <div class="card-body">
+            @if (Model.Roles.Any())
+            {
+                <ul class="list-group">
+                    @foreach (var role in Model.Roles)
+                    {
+                        <li class="list-group-item"> @role </li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <h6 class="card-title m-0 text-secondary"> This user has no roles. </h6>
+            }
+        </div>
+        <div class="card-footer">
+            <a asp-controller="Administration" asp-action="EditUserRoles" asp-route-userId="@Model.Id" class="btn btn-sm btn-outline-primary m-1 shadow">
+                Manage Roles
+            </a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+﻿@model List<UserRoleVm>
+
+@{ 
+    var roleId = ViewBag.RoleId;
+}
+
+<div class="my-4">
+
+    <form asp-controller="Administration" asp-action="EditRoleUsers" asp-route-roleId="@roleId" method="post">
+
+        <div class="card">
+            <div class="card-header">
+                <h3 class="font-weight-light"> Add or remove users from this role </h3>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        <li class="list-group-item">
+                            <div class="custom-control custom-switch">
+
+                                <input type="hidden" asp-for="@Model[i].UserId" />
+                                <input type="hidden" asp-for="@Model[i].UserName" />
+
+                                <input class="custom-control-input shadow" asp-for="@Model[i].IsSelected" id="@Model[i].UserId" />
+                                <label class="custom-control-label" for="@Model[i].UserId" > @Model[i].UserName </label>
+
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary m-1"> Save </button>
+                <a asp-controller="Administration" asp-action="EditRole" asp-route-id="@roleId" class="btn btn-secondary m-1"> Cancel </a>
+            </div>
+        </div>
+
+    </form>
+
+</div>
